@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   config.vm.box      = "precise64"
 
   # set hostonly ip address
-  config.vm.network :private_network, ip: "192.90.90.90"
+  config.vm.network :private_network, ip: "172.90.90.90"
 
   # increase memory of vm
   config.vm.provider "virtualbox" do |v|
