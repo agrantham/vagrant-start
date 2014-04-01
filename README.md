@@ -1,26 +1,49 @@
 Vagrant Starter
 =======================================
 
-Requirements
---------------------------------
-- Virtual Box v4.2.12
-- Vagrant v1.2.2
-- Omnibus to auto update the Chef version [Vagrant Omnibus] (https://github.com/schisamo/vagrant-omnibus)
-
-```ruby
-vagrant plugin install vagrant-omnibus
-```
+## Requirements
+* [VirtualBox](https://www.virtualbox.org) or [VMWare Fusion/Workstation](http://www.vmware.com/products/)
+	* If using VMWare, you have to purchase and install the [Vagrant VMWare Plugin](http://www.vagrantup.com/vmware)
+	* Instructions for the plugin found [here](http://docs.vagrantup.com/v2/vmware/installation.html)
+* [Vagrant >= 1.5.0](http://vagrantup.com)
 
 Usage
 --------------------------------
 
-1. Clone the repo with all of the cookbooks. `git clone --recursive git@github.com:sevilayha/vagrant-starter`
-2. Add your site files to the www folder
-3. `vagrant up`
+1. Clone the repo.
 
-Notes
---------------------------------
-The IP Address of your site will be 172.90.90.90 and this can also be used to remotely connect to MySQL Databases.
+```
+$ git clone git@github.com:sevilayha/vagrant-starter
+```
+
+2. Add your site files to the `www` folder
+3. Start the VM
+
+```
+$ vagrant up
+```
+
+You can now access your site at 172.90.90.90
+.
+
+## Installed software
+* Apache 2
+* MySQL
+* PHP 5.4 (with mysql, curl, mcrypt, memcached, gd)
+* memcached
+* vim, git, screen, curl, composer
+
+## Default credentials
+### MySQL
+* Username: root
+* Password: password
+* Host: localhost
+* Port: 3306
+
+**Note:** Remote MySQL access is enabled by default, so you can access the MySQL database using your favorite MySQL client with the above credentials (and using e.g. *projectname.local* as hostname).
+
+### Memcached
+* Port: 11211
 
 Credits
 ---------------------------------
