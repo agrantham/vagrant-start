@@ -10,10 +10,10 @@ Vagrant Starter
 Usage
 --------------------------------
 
-1. Clone the repo.
+1. Clone the repo and its submodules.
 
 ```
-$ git clone git@github.com:sevilayha/vagrant-starter
+$ git clone --recursive git@github.com:sevilayha/vagrant-starter
 ```
 
 2. Add your site files to the `www` folder
