@@ -11,6 +11,7 @@ Vagrant.configure("2") do |config|
   
   # box for vmware
   config.vm.box      = "precise64"
+  config.vm.box_url  = "http://files.vagrantup.com/precise64_vmware.box"
 
   # set hostonly ip address
   config.vm.network :private_network, ip: "172.90.90.90"
