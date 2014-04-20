@@ -33,6 +33,7 @@ Vagrant.configure("2") do |config|
       chef.add_recipe "apache2::mod_php5"
       chef.add_recipe "apache2::mod_rewrite"
       
+      chef.add_recipe "mysql"
       chef.add_recipe "mysql::server"
       
       chef.add_recipe "dotdeb"
