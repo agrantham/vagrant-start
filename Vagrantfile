@@ -21,57 +21,51 @@ Vagrant.configure("2") do |config|
     v.customize ["modifyvm", :id, "--memory", 768]
   end
 
-  # provision using chef
+  # Enable and configure chef solo
   config.vm.provision :chef_solo do |chef|
-    
-      # config.omnibus.chef_version = :latest
-      
-      chef.add_recipe "apt"
-      chef.add_recipe "openssl"
-      
-      chef.add_recipe "apache2"
-      chef.add_recipe "apache2::mod_php5"
-      chef.add_recipe "apache2::mod_rewrite"
-      
-      chef.add_recipe "mysql"
-      chef.add_recipe "mysql::server"
-      
-      chef.add_recipe "dotdeb"
-      chef.add_recipe "dotdeb::php54"
-      chef.add_recipe "php"
-      
-      chef.add_recipe "misc"
 
-      chef.json = {
+    chef.add_recipe "app::packages"
+    chef.add_recipe "app::web_server"
+    chef.add_recipe "app::vhost"
+    chef.add_recipe "app::db"
 
-        :misc   => {
-          :docroot    => "/vagrant/www",
-          :name       => "server",
-          
-          # Server name and alias(es) for Apache vhost
-          :server_name    => "app.dev",
-          :server_aliases => "*.app.dev",
-        
-          :db_name    => "appdb",
-          :packages   => [ "git", "vim", "curl", "php5-mysqlnd", "php5-curl", "php5-mcrypt" ]
-        },
+    chef.json = {
+      :app => {
+        # Project name
+        :name           => "app",
 
-        :mysql  => {
-          :server_root_password   => "password",
-          :server_repl_password   => "password",
-          :server_debian_password => "password",
-          :bind_address           => "172.90.90.90",
-          :allow_remote_root      => true
-        },
+        # Name of MySQL database that should be created
+        :db_name        => "appdb",
 
-        :apache => {
-          :timeout           => "300",
-          :keepalive         => "On",
-          :keepaliverequests => "100",
-          :keepalivetimeout  => "5"
-        }
-        
+        # Server name and alias(es) for Apache vhost
+        :server_name    => "app.local",
+        :server_aliases => %w{ www.app.local *.app.local },
+
+        # Document root for Apache vhost
+        :docroot        => "/vagrant/www",
+
+        # General packages
+        :packages   => %w{ git vim screen curl },
+
+        # PHP packages
+        :php_packages   => %w{ php5-mysqlnd php5-curl php5-mcrypt php5-gd }
+      },
+
+      :mysql => {
+        :server_root_password   => 'password',
+        :server_repl_password   => 'password',
+        :server_debian_password => 'password',
+        :bind_address           => '172.90.90.90',
+        :allow_remote_root      => true
+      },
+
+      :apache => {
+        :timeout           => "300",
+        :keepalive         => "On",
+        :keepaliverequests => "100",
+        :keepalivetimeout  => "5"
       }
-  end
 
+    }
+  end
 end
