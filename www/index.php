@@ -33,6 +33,7 @@ $mysqli->close();
 	</div>
 	<p class="lead">Virtual Machine is up and running.</p>
 
+	jldasfjladsfjkldsfjkldsf
 	<h3>Installed Software</h3>
 	<table class="table table-striped">
 		<tr>
